@@ -4,5 +4,7 @@ env:
     - GIMME_OS=windows GIMME_ARCH=amd64
 
 go:
-  - 1.7.x
-  - master
+  - 1.7.4
+
+script:
+ - go test -v ./...
