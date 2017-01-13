@@ -1,6 +1,6 @@
 language: go
 sudo: false
-env: GIMME_OS=windows GIMME_ARCH=amd64
+#env: GIMME_OS=windows GIMME_ARCH=amd64
 before_script:
  - go get -v ./...
 install:
