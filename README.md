@@ -8,12 +8,12 @@ This simple program do the simple things.
 
 ## Installation
 ### Linux
-1. Copy `acctivate-form-mailer` to your app folder (eg. `/opt/acctivate/apps/form-mailer`)
+1. Copy `acctivate-business-activity-mailer` to your app folder (eg. `/opt/acctivate/apps/form-mailer`)
 2. Put `config.toml` and `email.tpl` to the same dir.
 3. Make necessary changes to `config.toml`
 
 ### Windows
-1. Copy `acctivate-form-mailer.exe` (`i386` / `x64`) to your app folder (eg. `C:\Acctuate\Apps\Form-Mailer`)
+1. Copy `acctivate-business-activity-mailer.exe` (`i386` / `x64`) to your app folder (eg. `C:\Acctuate\Apps\Form-Mailer`)
 2. Put `config.toml` and `email.tpl` to the same dir.
 3. Make necessary changes to `config.toml`
 
