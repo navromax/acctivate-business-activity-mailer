@@ -1,11 +1,11 @@
 language: go
-
-env:
-    - GIMME_OS=windows GIMME_ARCH=amd64
-
-go:
-  - 1.7.4
-
+sudo: false
+env: GIMME_OS=windows GIMME_ARCH=amd64
+go: 1.7.4
+before_script:
+ - go get -v ./...
+install:
+ - export GOPATH="${TRAVIS_BUILD_DIR}/go-deps/:$GOPATH"
+ - export PATH="${TRAVIS_BUILD_DIR}/go-deps/bin:$PATH"
 script:
- - go get -t -v ./...
- - go test -v ./...
+ - go install -v ./...
