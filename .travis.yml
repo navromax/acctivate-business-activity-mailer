@@ -1,5 +1,6 @@
 language: go
 sudo: false
+go: 1.7.1
 #env: GIMME_OS=windows GIMME_ARCH=amd64
 before_script:
  - go get -v ./...
