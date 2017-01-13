@@ -1,11 +1,15 @@
 language: go
 sudo: false
 go: 1.7.1
-#env: GIMME_OS=windows GIMME_ARCH=amd64
+env: "GIMME_OS=windows GIMME_ARCH=amd64"
 before_script:
  - go get -v ./...
-#install:
-# - export GOPATH="${TRAVIS_BUILD_DIR}/go-deps/:$GOPATH"
-# - export PATH="${TRAVIS_BUILD_DIR}/go-deps/bin:$PATH"
 script:
  - go install -v ./...
+deploy:
+ provider: releases
+ api_key: "913d1f3074a8562e050a4751d5b9115e5c7eb656"
+ file: "acctivate-business-activity-mailer.exe"
+ skip_cleanup: true
+ on:
+   tags: true
