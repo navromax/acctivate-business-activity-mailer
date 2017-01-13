@@ -1,0 +1,18 @@
+[http]
+Port = 8080
+Redirect = "/form-successfully-sumbitted.html"
+
+[database]
+ConnectionString = "server=localhost;user id=sa;password=sa;database=ACCTIVATE!MyDB"
+
+[smtp]
+Host = "mysmtp.local"
+Port = 25
+User = ""
+Password = ""
+
+[email]
+From = "admin@mycompany.local"
+To = [ "info@followers.local" ]
+Subject = "New Service Request. Activity ID:"
+Template = "email.tpl"
