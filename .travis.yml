@@ -6,7 +6,9 @@ before_script:
 script:
 - go install -v ./...
 before_deploy:
+- pwd
 - ls -lA $HOME/gopath
+- ls -lA $TRAVIS_BUILD_DIR
 - echo 'ready to deploy?'
 deploy:
   provider: releases
