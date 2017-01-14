@@ -6,6 +6,7 @@ before_script:
 script:
 - go install -v ./...
 before_deploy:
+- tree ./...
 - echo 'ready to deploy?'
 deploy:
   provider: releases
