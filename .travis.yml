@@ -1,16 +1,21 @@
 language: go
 sudo: false
-go: 1.7.1
+go: 1.7.x
 #env: "GIMME_OS=windows GIMME_ARCH=amd64"
 before_script:
  - go get -v ./...
 script:
  - go install -v ./...
+before_deploy:
+ - "echo 'ready to deploy?'"
 deploy:
  provider: releases
- api_key: "913d1f3074a8562e050a4751d5b9115e5c7eb656"
+ api_key:
+  secure: "913d1f3074a8562e050a4751d5b9115e5c7eb656"
  file: "acctivate-business-activity-mailer.exe"
  skip_cleanup: true
  on:
    all_branches: true
-   #tags: true
+   tags: true
+after_deploy:
+ - "echo 'deployed!'"
