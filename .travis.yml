@@ -4,19 +4,13 @@ go: 1.7.x
 before_script:
 - go get -v ./...
 script:
-- go build -v ./...
+- GOOS=windows GOARCH=amd64 go build -o acctivate-business-activity-mailer-amd64.exe -v ./...
 before_deploy:
-- pwd
-- ls -lA $HOME/gopath
-- ls -lA $TRAVIS_BUILD_DIR
-- ls -lA $TRAVIS_BUILD_DIR/bin
-- echo 'ready to deploy?'
+- zip -9 $TRAVIS_BUILD_DIR/abam-win64-SNAPSHOT.zip $TRAVIS_BUILD_DIR/acctivate-business-activity-mailer-amd64.exe
 deploy:
   provider: releases
   api_key:
     secure: GJtDEjaXiCmhT+6cGLr/I/6vnsr1EwEGOVtHPEX5wW8c383EZBEardAEf0s4ZM9jGNTXV63bRwLsu1haLn93u/Osp1bb7dFDGgAGMiqCL1P2uvrQmIVNMmYyGurAJTraTaSRi9fpxOQE3niUNsrSySr/6pZmFqWVP5Ag0Kt0h0I8I3z9BpuPy4NO7QwdsJCBADizHFrAoMxaHXwyozBpuovL/UYWaSxg9PNsvmNaoDfNQkxPCTMZanUFYGxsrzt7aoGyDG04USQPkeYh803+aTsZFWLPMdLBVSxt67LgddA9pxfBcxWmGTWu+xxjqAUcDguE66tSPzid5pkcs/Rfe6DukfkAu1ZfYh0RVSPzGC1BMlfdIHCBXYvUBJ7yt32aFAQeSR6e7KlPNOuHMyAipzmLAM58aw6ioB5drc7sOQ16sI/ogM0XFh8pSN1NfrUA5ArgU5PSCBWqMLqTwpTQKrGmFbC05KGpgj1db8Z08ddJnVvY5JQcRsRHrHmyeRZ04c+7bx1PWhkJ9ju28b4mjgPdSpZQoA4v1IwntmnSvZTQ9/iwW/5Bi64jKVB0V2Cy36XQ6/3UBAb4nAOju2vSYiftcisz/Av/Ib1qCinnO2dcV816hzJAJ+BuKx8lQ/O9r2gDXIlPxaB2P7bsZrDhgf6lxAZ6IF0kO/nsA0rq5uE=
-  file: acctivate-business-activity-mailer
+  file: $TRAVIS_BUILD_DIR/abam-win64-SNAPSHOT.zip
   on:
     repo: andyglow/acctivate-business-activity-mailer
-after_deploy:
-- echo 'deployed!'
