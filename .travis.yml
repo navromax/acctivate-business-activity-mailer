@@ -7,7 +7,7 @@ script:
   - GOOS=windows GOARCH=amd64 go build -o acctivate-business-activity-mailer-amd64.exe ./...
 before_deploy:
   - export DISTR_W64=abam-$TRAVIS_TAG-win-x64.zip
-  - zip -9 $TRAVIS_BUILD_DIR/$DISTR_W64 $TRAVIS_BUILD_DIR/acctivate-business-activity-mailer-amd64.exe
+  - zip -9 $DISTR_W64 acctivate-business-activity-mailer-amd64.exe
 deploy:
   provider: releases
   api_key:
