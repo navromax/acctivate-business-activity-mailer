@@ -6,7 +6,7 @@ before_script:
 script:
 - go install -v ./...
 before_deploy:
-- tree ./...
+- tree $HOME/gopath
 - echo 'ready to deploy?'
 deploy:
   provider: releases
