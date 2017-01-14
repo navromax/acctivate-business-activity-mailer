@@ -4,10 +4,11 @@ go: 1.7.x
 before_script:
 - go get -v ./...
 script:
-- go install -v ./...
+- go build -v ./...
 before_deploy:
 - pwd
 - ls -lA $HOME/gopath
+- ls -lA $TRAVIS_BUILD_DIR
 - ls -lA $TRAVIS_BUILD_DIR/bin
 - echo 'ready to deploy?'
 deploy:
