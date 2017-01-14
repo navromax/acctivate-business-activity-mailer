@@ -6,18 +6,20 @@ before_script:
 script:
   - GOOS=windows GOARCH=amd64 go build -o acctivate-business-activity-mailer-amd64.exe -v ./...
 before_deploy:
-  - export GIT_TAG=$TRAVIS_BRANCH-0.1.$TRAVIS_BUILD_NUMBER
-  - zip -9 $TRAVIS_BUILD_DIR/abam-$GIT_TAG-win-x64.zip $TRAVIS_BUILD_DIR/acctivate-business-activity-mailer-amd64.exe
+  - export BUILD_VER=0.1.$TRAVIS_BUILD_NUMBER
+  - export DISTR_W64=abam-$BUILD_VER-win-x64.zip
+  - export GIT_TAG=$TRAVIS_BRANCH-$BUILD_VER
+  - zip -9 $TRAVIS_BUILD_DIR/$DISTR_W64 $TRAVIS_BUILD_DIR/acctivate-business-activity-mailer-amd64.exe
   - git config --global user.email "builds@travis-ci.com"
   - git config --global user.name "Travis CI"
-  - git tag $GIT_TAG -a -m "Generated tag from TravisCI for build $TRAVIS_BUILD_NUMBER"
+  - git tag $GIT_TAG -a -m "Snapshot $BUILD_VER"
   - git push -q https://$TAGPERM@github.com/andyglow/acctivate-business-activity-mailer --tags
   - ls -R
 deploy:
   provider: releases
   api_key:
     secure: GJtDEjaXiCmhT+6cGLr/I/6vnsr1EwEGOVtHPEX5wW8c383EZBEardAEf0s4ZM9jGNTXV63bRwLsu1haLn93u/Osp1bb7dFDGgAGMiqCL1P2uvrQmIVNMmYyGurAJTraTaSRi9fpxOQE3niUNsrSySr/6pZmFqWVP5Ag0Kt0h0I8I3z9BpuPy4NO7QwdsJCBADizHFrAoMxaHXwyozBpuovL/UYWaSxg9PNsvmNaoDfNQkxPCTMZanUFYGxsrzt7aoGyDG04USQPkeYh803+aTsZFWLPMdLBVSxt67LgddA9pxfBcxWmGTWu+xxjqAUcDguE66tSPzid5pkcs/Rfe6DukfkAu1ZfYh0RVSPzGC1BMlfdIHCBXYvUBJ7yt32aFAQeSR6e7KlPNOuHMyAipzmLAM58aw6ioB5drc7sOQ16sI/ogM0XFh8pSN1NfrUA5ArgU5PSCBWqMLqTwpTQKrGmFbC05KGpgj1db8Z08ddJnVvY5JQcRsRHrHmyeRZ04c+7bx1PWhkJ9ju28b4mjgPdSpZQoA4v1IwntmnSvZTQ9/iwW/5Bi64jKVB0V2Cy36XQ6/3UBAb4nAOju2vSYiftcisz/Av/Ib1qCinnO2dcV816hzJAJ+BuKx8lQ/O9r2gDXIlPxaB2P7bsZrDhgf6lxAZ6IF0kO/nsA0rq5uE=
-  file: abam-$GIT_TAG-win-x64.zip
+  file: $DISTR_W64
   on:
     tags: false
     all_branches: true
