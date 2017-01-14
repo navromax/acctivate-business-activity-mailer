@@ -12,4 +12,5 @@ deploy:
  file: "acctivate-business-activity-mailer.exe"
  skip_cleanup: true
  on:
-   tags: true
+   all_branches: true
+   #tags: true
