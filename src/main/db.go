@@ -4,13 +4,13 @@ import (
 	_ "github.com/denisenkom/go-mssqldb"
 	"database/sql"
 	"log"
+  "fmt"
 )
 
 var db *sql.DB
 
 func AddBusinessActivity(ba *BusinessActivity) (*string, error) {
-  var issueId string
-  if err := db.QueryRow(`
+  if rows, err := db.Query(`
 		EXECUTE spAddBusinessActivity
 			@Type = ?1,
 			@Code = ?2,
@@ -33,19 +33,29 @@ func AddBusinessActivity(ba *BusinessActivity) (*string, error) {
     ba.Description,
     ba.Discussion,
     ba.Reference,
-    ba.Reference2).Scan(&issueId); err != nil {
+    ba.Reference2); err != nil {
     return nil, err
   } else {
-    return &issueId, nil
+    defer rows.Close()
+
+    if rows.Next() {
+      var issueId string
+      if err := GetColumn(rows, "IssueID", &issueId); err != nil {
+        return nil, err
+      } else {
+        return &issueId, nil
+      }
+    } else {
+      return nil, fmt.Errorf("Result set hasn't been recieved")
+    }
   }
 }
+
 
 
 func InitDB(connString string) {
 	var err error
 	db, err = sql.Open("mssql", connString)
-
-
 
 	if err != nil {
     log.Println("Error connecting to database")

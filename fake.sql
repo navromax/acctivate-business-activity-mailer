@@ -1,3 +1,7 @@
+USE MaxFormEmail;
+GO
+
+DROP PROCEDURE [dbo].[spAddBusinessActivity];
 CREATE PROCEDURE [dbo].[spAddBusinessActivity]
     @ActivityID varchar(15) = '',
     @Type varchar(3) = '',
@@ -26,4 +30,14 @@ CREATE PROCEDURE [dbo].[spAddBusinessActivity]
     @Reference varchar(20) = '',
     @Reference2 varchar(20) = ''
 AS
-  SELECT * FROM tbIssue WHERE GUIDIssue = @GUIDIssueGO;
+  BEGIN
+    SELECT * FROM tbIssue;
+  END
+GO
+
+DROP TABLE  tbIssue;
+CREATE TABLE tbIssue(IssueID char(16));
+INSERT INTO tbIssue values('0123456789012345')
+
+
+execute spAddBusinessActivity @Reference2 = '';

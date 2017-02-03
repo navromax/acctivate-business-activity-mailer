@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
+  <link rel="stylesheet" href="style.css" type="text/css">
+  <!--[if IE]><style>.podl {height: 900px; width: 740px;}</style><![endif]-->
+  <title>Service Request</title>
+</head>
+
+<body>
+<div style="position: absolute; width:100%; height:100%; text-align: center;">
+  <div class="podl" align="center">
+    <h3>Service Request Form</h3>
+
+    <p>Are you having problems with your product? Contact us today and we can help.</p>
+    <p><b><font color=#3c800e>Always inform the Serial Number or Lot Number of the product.</font></b></p>
+    <p><b>Please fill-out the form below</b></p>
+
+    <form action="/send-form" method="post" enctype="multipart/form-data">
+      <table align="center">
+        <tr><td>Your name:</td><td><input name="name" type="text" required/></td></tr>
+        <tr><td>Email address:</td><td><input name="email" type="email" required/></td></tr>
+        <tr><td>Company name:</td><td><input name="company" type="text" required/></td></tr>
+        <tr>
+          <td>Choose a category :</td>
+          <td>
+            <select name="ActivityCode">
+              <option>Select one of the following ...</option>
+              <option value="TS">Tech Support</option>
+              <option value="CM">Complaint</option>
+              <option value="SI">Shipping Issue</option>
+              <option value="ORS">Order Status?</option>
+              <option value="LB">Labeling Issues</option>
+              <option value="PSI">Pre-Sale Inspection Failed</option>
+              <option value="QCF">QC Failed</option>
+              <option value="QI">Quality Issue</option>
+              <option value="EI">Email Issue</option>
+              <option value="ID">Internet Down</option>
+              <option value="RA">Remote Access Issue VPN</option>
+              <option value="SW">Software Issue</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Please tell us about your situation.<br>For better assistance please provide your Serial or Lot Number.</td>
+          <td><textarea name="message" cols="50" rows="10" required></textarea></td>
+        </tr>
+        <tr>
+          <td valign="top">You can attach the file to your comment:</td>
+          <td><input type="file" name="file"> (10 Mb max)</td>
+        </tr>
+
+        <tr>
+          <td colspan="2" align="center">
+            <input type="submit" name="Submit" value="Submit" class="button" />
+            <input type="reset" name="Reset" value="Clear" class="button" />
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+</div>
+
+</body>
+</html>

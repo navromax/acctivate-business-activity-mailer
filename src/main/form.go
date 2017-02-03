@@ -30,6 +30,7 @@ type BusinessActivity struct {
 	Discussion     string
 	Description    string
 	AttachmentPath *string
+  AttachmentName *string
 }
 
 var activityCodes = map[string]string{
@@ -99,9 +100,10 @@ func BuildBusinessActivity(form HttpForm) (*BusinessActivity, error) {
 				if _, err := bufio.NewReader(uploadedFile).WriteTo(w); err != nil {
 					return nil, err
 				} else {
-					var attachmentPath string
-					attachmentPath = f.Name()
-					ba.AttachmentPath = &attachmentPath
+          attachmentPath := f.Name()
+          attachmentName := form.File.Filename
+          ba.AttachmentPath = &attachmentPath
+          ba.AttachmentName = &attachmentName
 				}
 			}
 		}

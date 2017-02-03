@@ -5,12 +5,13 @@ import (
 	"log"
 	"gopkg.in/macaron.v1"
 	"github.com/go-macaron/binding"
+  "flag"
 )
 
 type Config struct {
-	Http  httpConfig `toml:"http"`
-	DB    dbConfig `toml:"database"`
-	Smtp  smtpConfig `toml:"smtp"`
+	Http  httpConfig  `toml:"http"`
+	DB    dbConfig    `toml:"database"`
+	Smtp  smtpConfig  `toml:"smtp"`
 	Email emailConfig `toml:"email"`
 }
 
@@ -38,6 +39,8 @@ type smtpConfig struct {
 	Ssl	bool
 }
 
+var configFileName = flag.String("config", "config.toml", "specifies config file to use")
+
 var conf Config
 
 func handleForm(ctx *macaron.Context, form HttpForm) {
@@ -63,12 +66,16 @@ func handleForm(ctx *macaron.Context, form HttpForm) {
   ctx.Redirect(conf.Http.Redirect)
 }
 
-func main() {
+func parseConfig() {
+  if _, err := toml.DecodeFile(*configFileName, &conf); err != nil {
+    log.Printf("Error parsing config file. %s", *configFileName)
+    log.Panic(err)
+  }
+}
 
-	if _, err := toml.DecodeFile("config.toml", &conf); err != nil {
-		log.Println("Error parsing config file")
-		log.Panic(err)
-	}
+func main() {
+  flag.Parse()
+  parseConfig()
 
 	// init mailer
 	if err := InitMailer(conf.Smtp, conf.Email); err != nil {

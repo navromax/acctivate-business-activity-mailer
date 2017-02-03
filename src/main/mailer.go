@@ -41,9 +41,13 @@ func SendBusinessActivity(issueId string, ba *BusinessActivity) error {
 	m.SetHeader("To", emailAttributes.To...)
 	m.SetHeader("Subject", emailAttributes.Subject + issueId)
 	m.SetBody("text/plain", body)
-	if ba.AttachmentPath != nil {
-		m.Attach(*ba.AttachmentPath)
-	}
+  if ba.AttachmentPath != nil {
+    if ba.AttachmentName != nil {
+      m.Attach(*ba.AttachmentPath, gomail.Rename(*ba.AttachmentName))
+    } else {
+      m.Attach(*ba.AttachmentPath)
+    }
+  }
 
 	return dialer.DialAndSend(m)
 }
