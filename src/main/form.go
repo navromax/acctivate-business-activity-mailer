@@ -61,7 +61,7 @@ func BuildBusinessActivity(form HttpForm) (*BusinessActivity, error) {
 	ba.Contact = form.Name
 	ba.Email = form.EMail
 
-	// The reference fields can be set to any value, but they are left blank in this example
+	// Fill in Product Name and Serial/Lot Number
 	ba.Reference = form.ProdName
 	ba.Reference2 = form.SerNo
 
