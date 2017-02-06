@@ -12,7 +12,10 @@ type HttpForm struct {
 	EMail        string `form:"email";binding:"Email"`
 	Company      string `form:"company"`
 	ActivityCode string `form:"ActivityCode"`
+	ProdName     string `form:"prodname"` 
+	SerNo	     string `form:"serno"`
 	Message      string `form:"message"`
+	
 	File         *multipart.FileHeader `form:"file"`
 }
 
@@ -35,17 +38,8 @@ type BusinessActivity struct {
 
 var activityCodes = map[string]string{
 	"TS": "Tech Support",
-	"CM": "Complaint",
-	"SI": "Shipping Issue",
-	"ORS": "Order Status?",
-	"LB": "Labeling Issues",
-	"QCF": "QC Failed",
-	"QI": "Quality Issue",
-	"EI": "Email Issue",
-	"ID": "Internet Down",
-	"RA": "Remote Access Issue VPN",
-	"SW": "Software Issue",
-	"PSI": "Pre-Sale Inspection Failed",
+	"COM": "Complaint",
+	"IR": "Information Request",
 }
 
 func BuildBusinessActivity(form HttpForm) (*BusinessActivity, error) {
@@ -68,8 +62,8 @@ func BuildBusinessActivity(form HttpForm) (*BusinessActivity, error) {
 	ba.Email = form.EMail
 
 	// The reference fields can be set to any value, but they are left blank in this example
-	ba.Reference = ""
-	ba.Reference2 = ""
+	ba.Reference = form.ProdName
+	ba.Reference2 = form.SerNo
 
 	// Fill in the company name and address for this request
 	ba.AddressName = form.Company
