@@ -39,7 +39,7 @@ type BusinessActivity struct {
 var activityCodes = map[string]string{
 	"TS": "Tech Support",
 	"COM": "Complaint",
-	"NCM": "NCMR",
+	"IR": "Information Request",
 }
 
 func BuildBusinessActivity(form HttpForm) (*BusinessActivity, error) {
