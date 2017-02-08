@@ -23,7 +23,12 @@ func GetColumn(rows *sql.Rows, columnName string, dest interface{}) error {
     if index < 0 {
       return fmt.Errorf("Column %s not found", columnName)
     }
+
     pointers := make([]interface{}, len(cols))
+    fake := make([]string, len(cols)) // to read the rest of columns
+    for i, _ := range pointers {
+      pointers[i] = &fake[i]
+    }
     pointers[index] = dest
 
     return rows.Scan(pointers...)

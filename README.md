@@ -1,5 +1,7 @@
 # Acctivate! form sender
 
+[![Build Status](https://travis-ci.org/andyglow/acctivate-business-activity-mailer.svg?branch=master)](https://travis-ci.org/andyglow/acctivate-business-activity-mailer)
+
 This simple program do the simple things.
 1. It hosts an html file with the form you want to handle
 2. It is able to process submission if the form

@@ -48,15 +48,16 @@ func handleForm(ctx *macaron.Context, form HttpForm) {
 		log.Println(err)
 	} else {
 		if issueId, err := AddBusinessActivity(ba); err != nil {
-			log.Println("Error adding business activity")
+			log.Println("Error adding business activity. EMails won't be sent")
 			log.Println(err)
 		} else {
       id := *issueId
-      log.Printf("Business activity %s has just added", id)
+      log.Printf("Business activity %s has just added. Sending ...", id)
 			if err := SendBusinessActivity(id, ba); err != nil {
 				log.Println("Unable to send email")
 				log.Println(err)
 			} else {
+        log.Printf("Business activity %s successfully sent", id)
         ctx.Redirect(conf.Http.Redirect + "?id=" + id)
         return
       }
