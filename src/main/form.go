@@ -37,7 +37,6 @@ type BusinessActivity struct {
 }
 
 var activityCodes = map[string]string{
-	"TS": "Tech Support",
 	"COM": "Complaint",
 	"IR": "Information Request",
 }
